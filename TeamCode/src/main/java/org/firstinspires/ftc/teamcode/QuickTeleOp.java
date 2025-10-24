@@ -79,10 +79,10 @@ public class QuickTeleOp extends LinearOpMode {
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
-        frontLeftDrive = hardwareMap.get(DcMotor.class, "frontLeft");
-        backLeftDrive = hardwareMap.get(DcMotor.class, "backLeft");
-        frontRightDrive = hardwareMap.get(DcMotor.class, "frontRight");
-        backRightDrive = hardwareMap.get(DcMotor.class, "backRight");
+        frontLeftDrive = hardwareMap.get(DcMotor.class, "lf");
+        backLeftDrive = hardwareMap.get(DcMotor.class, "lr");
+        frontRightDrive = hardwareMap.get(DcMotor.class, "rf");
+        backRightDrive = hardwareMap.get(DcMotor.class, "rr");
 
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
