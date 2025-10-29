@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode; // make sure this aligns with class location
 
+import android.widget.Spinner;
+
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierCurve;
 import com.pedropathing.geometry.BezierLine;
@@ -10,7 +12,9 @@ import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
+import org.firstinspires.ftc.teamcode.systems.RobotSubsystems;
 
 @Autonomous(name = "Test Auto", group = "Examples")
 public class TestAuto extends OpMode {
@@ -20,15 +24,18 @@ public class TestAuto extends OpMode {
 
     private int pathState;
 
-    private final Pose startPose = new Pose(0, 0, Math.toRadians(0)); 
+    private final Pose startPose = new Pose(0, 0, Math.toRadians(0));
     private final Pose firstPose = new Pose(48, 0, Math.toRadians(0));
     private final Pose secondPose = new Pose(48, -72, Math.toRadians(180));
-    private final Pose finalPose = new Pose(0, 0, Math.toRadians(0)); 
+    private final Pose finalPose = new Pose(0, 0, Math.toRadians(0));
     private final Pose curvePose = new Pose(15, -60, Math.toRadians(90));
-   
+
 
     private Path firstMove;
     private PathChain secondMove, finalMove;
+
+    private RobotSubsystems robot = new RobotSubsystems(this);
+
 
     public void buildPaths() {
         /* This is our firstMove path. We are using a BezierLine, which is a straight line. */
@@ -55,6 +62,7 @@ public class TestAuto extends OpMode {
     public void autonomousPathUpdate() {
         switch (pathState) {
             case 0:
+//                robot.Spin(1,2000);
                 follower.followPath(firstMove);
                 setPathState(1);
                 break;
