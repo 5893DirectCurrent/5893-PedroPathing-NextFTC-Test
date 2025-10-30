@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode; // make sure this aligns with class location
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+
 import android.widget.Spinner;
 
 import com.pedropathing.follower.Follower;
@@ -11,7 +13,9 @@ import com.pedropathing.paths.PathChain;
 import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.systems.RobotSubsystems;
@@ -30,12 +34,40 @@ public class TestAuto extends OpMode {
     private final Pose finalPose = new Pose(0, 0, Math.toRadians(0));
     private final Pose curvePose = new Pose(15, -60, Math.toRadians(90));
 
+    private CRServo Servo;
+
 
     private Path firstMove;
     private PathChain secondMove, finalMove;
 
-    private RobotSubsystems robot = new RobotSubsystems(this);
 
+
+
+//    private RobotSubsystems robot = new RobotSubsystems(this);
+
+    public void Spin(double power, int time){
+        final ElapsedTime runtime = new ElapsedTime();
+        runtime.milliseconds();
+        runtime.reset();
+        while (runtime.time() < time) {
+            Servo.setPower(power);
+        }
+        Servo.setPower(0);
+    }
+
+    @Override
+    public void init() {
+        pathTimer = new Timer();
+        opmodeTimer = new Timer();
+        opmodeTimer.resetTimer();
+
+        Servo = hardwareMap.get(CRServo.class, "servo");
+
+        follower = Constants.createFollower(hardwareMap);
+        buildPaths();
+        follower.setStartingPose(startPose);
+
+    }
 
     public void buildPaths() {
         /* This is our firstMove path. We are using a BezierLine, which is a straight line. */
@@ -62,11 +94,15 @@ public class TestAuto extends OpMode {
     public void autonomousPathUpdate() {
         switch (pathState) {
             case 0:
-//                robot.Spin(1,2000);
+                Spin(1,2000);
                 follower.followPath(firstMove);
-                setPathState(1);
+                setPathState(2);
                 break;
-            case 1:
+//            case 1:
+//
+//                setPathState(2);
+//                break;
+            case 2:
 
             /* You could check for
             - Follower State: "if(!follower.isBusy()) {}"
@@ -80,10 +116,10 @@ public class TestAuto extends OpMode {
 
                     /* Since this is a pathChain, we can have Pedro hold the end point while we are grabbing the sample */
                     follower.followPath(secondMove, true);
-                    setPathState(2);
+                    setPathState(3);
                 }
                 break;
-            case 2:
+            case 3:
                 /* This case checks the robot's position and will wait until the robot position is close (1 inch away) from the secondPose's position */
                 if (!follower.isBusy()) {
                     /* Grab Sample */
@@ -126,18 +162,7 @@ public class TestAuto extends OpMode {
     /**
      * This method is called once at the init of the OpMode.
      **/
-    @Override
-    public void init() {
-        pathTimer = new Timer();
-        opmodeTimer = new Timer();
-        opmodeTimer.resetTimer();
 
-
-        follower = Constants.createFollower(hardwareMap);
-        buildPaths();
-        follower.setStartingPose(startPose);
-
-    }
 
     /**
      * This method is called continuously after Init while waiting for "play".

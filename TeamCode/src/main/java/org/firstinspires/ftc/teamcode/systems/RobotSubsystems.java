@@ -2,43 +2,40 @@ package org.firstinspires.ftc.teamcode.systems;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-
-
-import org.firstinspires.ftc.teamcode.TestAuto;
-
 public class RobotSubsystems {
 
-    public CRServo Servo = null;
+    private CRServo Servo = null;
 
-    public LinearOpMode myOpMode;
+    private OpMode myOpMode;
 
 
-    public RobotSubsystems(LinearOpMode opmode) {
+    public RobotSubsystems(OpMode opmode) {
         myOpMode = opmode;
     }
 
-    public RobotSubsystems(TestAuto testAuto) {
-    }
+//    public RobotSubsystems(TestAuto testAuto) {
+//    }
 
-    public void initialize(boolean showTelemetry) {
+    public void initialize() {
 
         Servo = hardwareMap.get(CRServo.class, "servo");
 
     }
 
-//    public void Spin(double power, int time){
-//        final ElapsedTime runtime = new ElapsedTime();
-//        runtime.milliseconds();
-//        runtime.reset();
-//        while (myOpMode.opModeIsActive()) {
-//            Servo.setPower(power);
-//            if(runtime.time() >= time){
-//                break;
-//            }
-//        }
-//    }
+    public void Spin(double power, int time){
+        final ElapsedTime runtime = new ElapsedTime();
+        runtime.milliseconds();
+        runtime.reset();
+        while (true) {
+            Servo.setPower(power);
+            if (runtime.time()>=time){
+                Servo.setPower(0);
+                break;
+            }
+        }
+    }
 }
