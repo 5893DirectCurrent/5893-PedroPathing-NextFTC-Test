@@ -74,7 +74,7 @@ public class QuickTeleOp extends LinearOpMode {
     private DcMotor backLeftDrive = null;
     private DcMotor frontRightDrive = null;
     private DcMotor backRightDrive = null;
-    private CRServo Servo = null;
+//    private CRServo Servo = null;
 
     @Override
     public void runOpMode() {
@@ -85,7 +85,7 @@ public class QuickTeleOp extends LinearOpMode {
         backLeftDrive = hardwareMap.get(DcMotor.class, "lr");
         frontRightDrive = hardwareMap.get(DcMotor.class, "rf");
         backRightDrive = hardwareMap.get(DcMotor.class, "rr");
-        Servo = hardwareMap.get(CRServo.class, "servo");
+//        Servo = hardwareMap.get(CRServo.class, "servo");
 
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
@@ -166,11 +166,11 @@ public class QuickTeleOp extends LinearOpMode {
             backLeftDrive.setPower(backLeftPower);
             backRightDrive.setPower(backRightPower);
 
-            if (gamepad1.a){
-                Servo.setPower(1);
-            } else {
-                Servo.setPower(0);
-            }
+//            if (gamepad1.a){
+//                Servo.setPower(1);
+//            } else {
+//                Servo.setPower(0);
+//            }
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
