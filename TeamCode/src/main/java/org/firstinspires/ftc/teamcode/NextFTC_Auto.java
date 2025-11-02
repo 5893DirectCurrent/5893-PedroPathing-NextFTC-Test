@@ -13,6 +13,7 @@ import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay;
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
 
+import org.firstinspires.ftc.teamcode.commands.FollowPath;
 import org.firstinspires.ftc.teamcode.systems.Claw;
 
 import com.pedropathing.follower.Follower;
@@ -22,14 +23,13 @@ import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.Path;
 import com.pedropathing.paths.PathChain;
 import com.pedropathing.util.Timer;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 
-import org.firstinspires.ftc.teamcode.systems.Claw;
+
 
 @Autonomous(name = "Test Auto", group = "Examples")
 public class NextFTC_Auto extends NextFTCOpMode {
@@ -141,5 +141,6 @@ public class NextFTC_Auto extends NextFTCOpMode {
     public void onStartButtonPressed() {
         firstRoutine().invoke();
     }
+
 }
 
