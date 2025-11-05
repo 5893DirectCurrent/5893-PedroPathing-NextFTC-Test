@@ -1,35 +1,36 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+
 import com.qualcomm.robotcore.hardware.Servo;
-import com.rowanmcalpin.nextftc.core.Subsystem;
-import com.rowanmcalpin.nextftc.core.command.Command;
-import com.rowanmcalpin.nextftc.ftc.OpModeData;
-import com.rowanmcalpin.nextftc.ftc.hardware.ServoToPosition;
 
-public class Claw extends Subsystem {
-    // BOILERPLATE
+import dev.nextftc.core.commands.Command;
+import dev.nextftc.core.subsystems.Subsystem;
+import dev.nextftc.hardware.impl.ServoEx;
+import dev.nextftc.hardware.positionable.SetPosition;
+
+
+import dev.nextftc.core.components.Component;
+import dev.nextftc.hardware.impl.ServoEx;
+import dev.nextftc.hardware.positionable.Positionable;
+import dev.nextftc.hardware.positionable.SetPosition;
+import dev.nextftc.hardware.positionable.SetPositions;
+
+public class Claw implements Subsystem {
+    // put hardware, commands, etc here
     public static final Claw INSTANCE = new Claw();
-    private Claw() { }
+    private Claw() {}
+    private ServoEx servo = new ServoEx("servo");
 
-    // USER CODE
-    public Servo servo;
+    public Command open = new SetPositions(
 
-    public String name = "servo";
+            servo.to(1)).requires(this);
 
-    public Command open() {
-        return new ServoToPosition(servo, // SERVO TO MOVE
-                0.9, // POSITION TO MOVE TO
-                this); // IMPLEMENTED SUBSYSTEM
-    }
+    public Command close = new SetPositions(
 
-    public Command close() {
-        return new ServoToPosition(servo, // SERVO TO MOVE
-                0.2, // POSITION TO MOVE TO
-                this); // IMPLEMENTED SUBSYSTEM
-    }
+            servo.to(0)).requires(this);
 
-    @Override
-    public void initialize() {
-        servo = OpModeData.INSTANCE.getHardwareMap().get(Servo.class, name);
-    }
+
+    //private final SetPosition open = new SetPosition(servo, 0);
+    //private final SetPosition close = new SetPosition(servo, 1);
 }
