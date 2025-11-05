@@ -40,7 +40,7 @@ public class FollowPath extends Command {
         @Override
         public void start() {
             // Executed when the command begins
-
+//                FollowPath.invoke();
         }
 
         @Override

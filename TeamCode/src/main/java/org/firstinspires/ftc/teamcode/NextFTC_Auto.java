@@ -1,8 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import static org.firstinspires.ftc.teamcode.pedroPathing.Tuning.follower;
-
-
+import static dev.nextftc.extensions.pedro.PedroComponent.follower;
 
 import android.graphics.Point;
 
@@ -12,9 +11,18 @@ import com.rowanmcalpin.nextftc.core.command.groups.ParallelGroup;
 import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay;
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
+
+//import com.rowanmcalpin.nextftc.pedro.PedroComponent.Follower;
+//import dev.nextftc.extensions.pedro.FollowPathCommand;
+//import dev.nextftc.extensions.pedro.FollowPath;
+
+
 
 import org.firstinspires.ftc.teamcode.commands.FollowPath;
 import org.firstinspires.ftc.teamcode.systems.Claw;
+
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierCurve;
@@ -35,6 +43,8 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 public class NextFTC_Auto extends NextFTCOpMode {
     public NextFTC_Auto() {
         super(Claw.INSTANCE);
+//        new PedroComponent(Constants::createFollower);
+
     }
 
     private Follower follower;
@@ -87,7 +97,7 @@ public class NextFTC_Auto extends NextFTCOpMode {
                 new FollowPath(secondMove),
                 new ParallelGroup(
                         new FollowPath(finalMove),
-                        Claw.INSTANCE.close()
+                        Claw.INSTANCE.open()
                 )
         );
     }
