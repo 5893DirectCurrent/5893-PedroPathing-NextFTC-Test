@@ -7,7 +7,7 @@ import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
 import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay;
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
 
-import org.firstinspires.ftc.teamcode.systems.Claw;
+import org.firstinspires.ftc.teamcode.subsystems.Claw;
 
 @Autonomous(name = "NextFTC Autonomous Program Java")
 public class NextFTC_Auto_Example extends NextFTCOpMode {

@@ -13,8 +13,8 @@ import com.qualcomm.robotcore.hardware.CRServo;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
-@Autonomous(name = "Test Auto", group = "Examples")
-public class TestAuto extends OpMode {
+@Autonomous(name = "Test Pedro Auto", group = "Examples")
+public class PedroAutoTest extends OpMode {
 
     private Follower follower;
     private Timer pathTimer, actionTimer, opmodeTimer;

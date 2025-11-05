@@ -1,45 +1,30 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.teamcode.pedroPathing.Tuning.follower;
-import static dev.nextftc.extensions.pedro.PedroComponent.follower;
-
-import android.graphics.Point;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.rowanmcalpin.nextftc.core.command.Command;
 import com.rowanmcalpin.nextftc.core.command.groups.ParallelGroup;
 import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup;
-import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay;
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
+import dev.nextftc.extensions.pedro.FollowPath;
 
 
-//import com.rowanmcalpin.nextftc.pedro.PedroComponent.Follower;
-//import dev.nextftc.extensions.pedro.FollowPathCommand;
-//import dev.nextftc.extensions.pedro.FollowPath;
-
-
-
-import org.firstinspires.ftc.teamcode.commands.FollowPath;
-import org.firstinspires.ftc.teamcode.systems.Claw;
+import org.firstinspires.ftc.teamcode.subsystems.Claw;
 
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierCurve;
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
-import com.pedropathing.paths.Path;
 import com.pedropathing.paths.PathChain;
 import com.pedropathing.util.Timer;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.CRServo;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 
 
 
-@Autonomous(name = "Test Auto", group = "Examples")
+@Autonomous(name = "Pedro + NextFTC Auto", group = "Examples")
 public class NextFTC_Auto extends NextFTCOpMode {
     public NextFTC_Auto() {
         super(Claw.INSTANCE);
@@ -63,12 +48,6 @@ public class NextFTC_Auto extends NextFTCOpMode {
     private PathChain firstMove, secondMove, finalMove;
 
 
-//    private RobotSubsystems robot = new RobotSubsystems(this);
-
-
-
-
-
     public void buildPaths() {
         /* This is our firstMove path. We are using a BezierLine, which is a straight line. */
         firstMove = follower.pathBuilder()
@@ -89,6 +68,7 @@ public class NextFTC_Auto extends NextFTCOpMode {
                 .build();
 
     }
+
 
     public Command firstRoutine() {
         return new SequentialGroup(
