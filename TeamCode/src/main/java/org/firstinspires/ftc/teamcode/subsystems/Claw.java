@@ -20,15 +20,12 @@ public class Claw implements Subsystem {
     // put hardware, commands, etc here
     public static final Claw INSTANCE = new Claw();
     private Claw() {}
-    private ServoEx servo = new ServoEx("servo");
+    private final ServoEx servo = new ServoEx("servo");
 
-    public Command open = new SetPositions(
+    public Command open = new SetPositions(servo.to(1)).requires(this);
 
-            servo.to(1)).requires(this);
 
-    public Command close = new SetPositions(
-
-            servo.to(0)).requires(this);
+    public Command close = new SetPositions(servo.to(0)).requires(this);
 
 
     //private final SetPosition open = new SetPosition(servo, 0);
